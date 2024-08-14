@@ -15,7 +15,7 @@ _✨ NoneBot2 暗语消息 ✨_
 <a href="">
   <img src="https://img.shields.io/pypi/v/nonebot-plugin-argot.svg" alt="pypi"
 </a>
-<img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="python">
+<img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="python">
 <a href="https://pdm.fming.dev">
   <img src="https://img.shields.io/badge/pdm-managed-blueviolet" alt="pdm-managed">
 </a>
