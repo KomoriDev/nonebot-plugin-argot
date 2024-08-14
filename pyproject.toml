@@ -19,6 +19,11 @@ license = {text = "MIT"}
 adapters = [
     "nonebot-adapter-onebot>=2.4.4",
 ]
+tests = [
+    "nonebug>=0.3.7",
+    "pytest-mock>=3.14.0",
+    "pytest-asyncio>=0.23.8",
+]
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
@@ -62,3 +67,5 @@ pythonVersion = "3.10"
 pythonPlatform = "All"
 typeCheckingMode = "basic"
 
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
