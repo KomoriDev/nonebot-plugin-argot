@@ -1,0 +1,13 @@
+[project]
+name = "nonebot_plugin_test"
+version = "0.1.0"
+description = "nonebot_plugin_test"
+requires-python = ">=3.10"
+
+[tool.nonebot]
+adapters = [
+    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" }
+]
+plugins = ["nonebot_plugin_argot"]
+plugin_dirs = []
+builtin_plugins = []
