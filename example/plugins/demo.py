@@ -12,32 +12,30 @@ from nonebot_plugin_argot import add_argot
 
 cmd1 = Command("test1").build(use_cmd_start=True)
 
+
 @cmd1.handle()
 async def _():
 
-    message = await (
-        UniMessage.text("This is a text message. Reply /background to get background image.")
-        .send(
-            argot={
-                "name": "background",
-                "command": "background",
-                "content": "https://koishi.chat/logo.png",
-                "expire": 240   # The argot will expired after 4 minutes.
-            }
-        )
+    message = await UniMessage.text("This is a text message. Reply /background to get background image.").send(
+        argot={
+            "name": "background",
+            "command": "background",
+            "content": "https://koishi.chat/logo.png",
+            "expire": 240,  # The argot will expired after 4 minutes.
+        }
     )
 
     await add_argot(
         "author",
         message.msg_ids[0]["message_id"],
         content="某内鬼",
-        expire_time=timedelta(minutes=2),   # use timedelta to set expire time
+        expire_time=timedelta(minutes=2),  # use timedelta to set expire time
     )
     await cmd1.finish()
 
 
-
 cmd2 = on_command("test2")
+
 
 @cmd2.handle()
 async def _():

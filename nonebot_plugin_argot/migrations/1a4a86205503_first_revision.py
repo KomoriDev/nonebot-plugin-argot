@@ -1,7 +1,7 @@
 """first revision
 
 迁移 ID: 1a4a86205503
-父迁移: 
+父迁移:
 创建时间: 2024-08-13 08:56:01.508860
 
 """
@@ -30,9 +30,7 @@ def upgrade(name: str = "") -> None:
         sa.Column("content", sa.String(), nullable=False),
         sa.Column("created_at", sa.DateTime(), nullable=False),
         sa.Column("expired_at", sa.DateTime(), nullable=True),
-        sa.PrimaryKeyConstraint(
-            "message_id", "name", name=op.f("pk_nonebot_plugin_argot_argot")
-        ),
+        sa.PrimaryKeyConstraint("message_id", "name", name=op.f("pk_nonebot_plugin_argot_argot")),
         info={"bind_key": "nonebot_plugin_argot"},
     )
     # ### end Alembic commands ###

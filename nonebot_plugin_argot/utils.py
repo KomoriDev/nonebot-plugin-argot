@@ -1,5 +1,4 @@
 import re
-
 from typing import TYPE_CHECKING
 from collections.abc import Sequence
 from datetime import datetime, timedelta
@@ -31,4 +30,3 @@ def format_argots(argots: Sequence["Argot"]) -> str:
 
 def extract_urls(message) -> list[str]:
     return re.findall(r"https?://[^\s]+", message)
-

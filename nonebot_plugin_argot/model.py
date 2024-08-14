@@ -2,7 +2,7 @@ from functools import wraps
 from collections.abc import Sequence
 from datetime import datetime, timedelta
 
-from sqlalchemy import select, delete, and_
+from sqlalchemy import and_, delete, select
 from sqlalchemy.orm import Mapped, mapped_column
 from nonebot_plugin_orm import Model, get_session, get_scoped_session
 
@@ -10,7 +10,7 @@ from .utils import calculate_expired_at
 
 
 class Argot(Model):
-    message_id:Mapped[int] = mapped_column(primary_key=True)
+    message_id: Mapped[int] = mapped_column(primary_key=True)
     """Message ID"""
     name: Mapped[str] = mapped_column(primary_key=True)
     """Argot Name"""
@@ -28,7 +28,7 @@ async def add_argot(
     *,
     content: str | int,
     command: str | None = None,
-    expire_time: timedelta | int | None = None
+    expire_time: timedelta | int | None = None,
 ) -> None:
     from .matcher import argot_cmd
 
@@ -48,9 +48,7 @@ async def add_argot(
 
 async def delete_expired_argots() -> None:
     session = get_scoped_session()
-    await session.execute(
-        delete(Argot).where(Argot.expired_at < datetime.now())
-    )
+    await session.execute(delete(Argot).where(Argot.expired_at < datetime.now()))
     await session.commit()
 
 
@@ -59,6 +57,7 @@ def clean_expired_data(func):
     async def wrapper(*args, **kwargs):
         await delete_expired_argots()
         return await func(*args, **kwargs)
+
     return wrapper
 
 
@@ -75,8 +74,7 @@ async def get_argots(message_id: int) -> Sequence[Argot] | None:
     session = get_scoped_session()
 
     stmt = select(Argot).where(
-        Argot.message_id == message_id,
-        (Argot.expired_at.is_(None)) | (Argot.expired_at > datetime.now())
+        Argot.message_id == message_id, (Argot.expired_at.is_(None)) | (Argot.expired_at > datetime.now())
     )
 
     argots = (await session.execute(stmt)).scalars().all()

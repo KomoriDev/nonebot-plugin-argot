@@ -1,9 +1,10 @@
 from datetime import timedelta
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict, NotRequired
 
 
 class ArgotArgs(TypedDict):
     """暗语参数"""
+
     name: str
     """暗语名称"""
     content: str
@@ -14,4 +15,3 @@ class ArgotArgs(TypedDict):
     """用户触发指令（输入该指令查看暗语）"""
     expired_time: NotRequired[timedelta | int]
     """过期时间"""
-

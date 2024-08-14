@@ -1,5 +1,6 @@
 from nonebot import get_plugin_config
-from pydantic import BaseModel, Field
+from pydantic import Field, BaseModel
+
 
 class ScopedConfig(BaseModel):
     url_to_image: bool = True

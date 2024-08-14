@@ -3,7 +3,6 @@ name = "nonebot-plugin-argot"
 version = "0.1.0"
 description = "NoneBot 暗语"
 authors = [
-    {name = "<your_name>", email = "<your_email>"},
     {name = "KomoriDev", email = "mute231010@gmail.com"},
 ]
 dependencies = [
@@ -23,12 +22,6 @@ adapters = [
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
-
-[tool.nonebot]
-adapters = [
-    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" }
-]
-plugins = ["nonebot_plugin_argot"]
 
 [tool.pdm]
 distribution = true

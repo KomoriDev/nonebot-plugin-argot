@@ -1,21 +1,17 @@
 from nonebot.adapters import Bot, Event
-from nonebot_plugin_alconna import Command, Match, Arparma
-from nonebot_plugin_alconna.uniseg import MsgId, UniMessage, Image
+from nonebot_plugin_alconna import Match, Arparma, Command
+from nonebot_plugin_alconna.uniseg import Image, MsgId, UniMessage
 from nonebot_plugin_alconna.builtins.extensions import ReplyRecordExtension
 
 from .config import plugin_config
-from .utils import format_argots, extract_urls
-from .model import get_argots, get_argot
+from .model import get_argot, get_argots
+from .utils import extract_urls, format_argots
 
-
-argot_cmd = (
-    Command("argot [name:str]")
-    .build(
-        block=True,
-        use_cmd_start=True,
-        extensions=[ReplyRecordExtension()],
-        auto_send_output=True
-    )
+argot_cmd = Command("argot [name:str]").build(
+    block=True,
+    use_cmd_start=True,
+    extensions=[ReplyRecordExtension()],
+    auto_send_output=True,
 )
 
 

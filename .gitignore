@@ -164,6 +164,7 @@ cython_debug/
 # VSCode
 .vscode/
 
+bot.py
 data/
 argot.db
 shortcut.db.**

@@ -16,10 +16,12 @@ async def _() -> None:
     command_manager.load_cache()
     logger.info("Argot cache loaded")
 
+
 @driver.on_shutdown
 async def _() -> None:
     command_manager.dump_cache()
     logger.info("Argot cache dumped")
+
 
 @Bot.on_called_api
 async def _(
@@ -43,7 +45,7 @@ async def _(
             message_id=message_id,
             content=argot_content,
             command=argot_command,
-            expire_time=argot_expired
+            expire_time=argot_expired,
         )
 
         raise MockApiException(result=result)
