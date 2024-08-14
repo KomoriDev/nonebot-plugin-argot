@@ -101,7 +101,12 @@ await (
 )
 ```
 
-或者使用 `add_argot` 函数
+或者使用 `add_argot` 函数。
+参数如下：
+- `name`：名称（相当于 `content` 的 key）
+- `content`：暗语内容
+- `command`：用户响应指令（为 None 则无法响应）
+- `expire`：过期时间（单位：秒；在 `add_argot` 函数中可传入 timedelta）
 
 ### 获取暗语信息
 
