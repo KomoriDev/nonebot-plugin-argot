@@ -2,8 +2,8 @@ from functools import wraps
 from collections.abc import Sequence
 from datetime import datetime, timedelta
 
-from sqlalchemy import and_, delete, select
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Text, String, and_, delete, select
 from nonebot_plugin_orm import Model, get_session, get_scoped_session
 
 from .utils import calculate_expired_at
@@ -12,9 +12,9 @@ from .utils import calculate_expired_at
 class Argot(Model):
     message_id: Mapped[int] = mapped_column(primary_key=True)
     """Message ID"""
-    name: Mapped[str] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(20), primary_key=True)
     """Argot Name"""
-    content: Mapped[str]
+    content: Mapped[str] = mapped_column(Text)
     """Argot Content"""
     created_at: Mapped[datetime] = mapped_column(default=datetime.now())
     """Create Time"""
