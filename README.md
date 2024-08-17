@@ -17,10 +17,22 @@ _✨ NoneBot2 暗语消息 ✨_
 </a>
 <img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="python">
 <a href="https://pdm.fming.dev">
-  <img src="https://img.shields.io/badge/pdm-managed-blueviolet" alt="pdm-managed">
+  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fpdm-project%2F.github%2Fbadge.json" alt="pdm-managed">
 </a>
 <a href="https://github.com/nonebot/plugin-alconna">
   <img src="https://img.shields.io/badge/Alconna-resolved-2564C2" alt="alc-resolved">
+</a>
+<br />
+<a href="#-效果图">
+  <strong>📸 演示与预览</strong>
+</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="#-安装">
+  <strong>📦️ 下载插件</strong>
+</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="https://qm.qq.com/q/Vuipof2zug" target="__blank">
+  <strong>💬 加入交流群</strong>
 </a>
 
 </div>
