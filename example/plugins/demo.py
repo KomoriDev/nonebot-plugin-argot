@@ -1,3 +1,4 @@
+from pathlib import Path
 from datetime import timedelta
 
 from nonebot import require, on_command
@@ -9,6 +10,8 @@ from nonebot_plugin_alconna import Command
 from nonebot_plugin_alconna.uniseg import UniMessage
 
 from nonebot_plugin_argot import add_argot
+
+from .utils import image_to_base64
 
 cmd1 = Command("test1").build(use_cmd_start=True)
 
@@ -46,3 +49,29 @@ async def _():
         content="某内鬼",
         expire_time=timedelta(minutes=2),
     )
+
+
+cmd3 = Command("test3").build(use_cmd_start=True)
+
+
+@cmd3.handle()
+async def _():
+
+    path: Path = Path(__file__).parent / "image.png"
+
+    message = await UniMessage.text("This is a text message. Reply /image to get image.").send(
+        argot={
+            "name": "image",
+            "command": "image",
+            "content": image_to_base64(path),
+            "expire": 240,  # The argot will expired after 4 minutes.
+        }
+    )
+
+    await add_argot(
+        "author",
+        message.msg_ids[0]["message_id"],
+        content="某内鬼",
+        expire_time=timedelta(minutes=2),  # use timedelta to set expire time
+    )
+    await cmd1.finish()
