@@ -31,21 +31,28 @@ async def _(
     data: dict[str, Any],
     result: dict[str, Any],
 ) -> None:
-    if not exception and api == "send_msg" and "argot" in data:
+    if not isinstance(bot, Bot):
+        return
 
-        argot_name: str = data["argot"].get("name")
-        argot_content: str = data["argot"].get("content")
-        argot_command: str = data["argot"].get("command", None)
-        argot_expired: int = data["argot"].get("expire", None)
+    if exception or not result:
+        return
 
-        message_id: int = result["message_id"]
+    if "send_" not in api or "argot" not in data:
+        return
 
-        await add_argot(
-            name=argot_name,
-            message_id=message_id,
-            content=argot_content,
-            command=argot_command,
-            expire_time=argot_expired,
-        )
+    argot_name: str = data["argot"].get("name")
+    argot_content: str = data["argot"].get("content")
+    argot_command: str = data["argot"].get("command", None)
+    argot_expired: int = data["argot"].get("expire", None)
 
-        raise MockApiException(result=result)
+    message_id: int = result["message_id"]
+
+    await add_argot(
+        name=argot_name,
+        message_id=message_id,
+        content=argot_content,
+        command=argot_command,
+        expire_time=argot_expired,
+    )
+
+    raise MockApiException(result=result)
