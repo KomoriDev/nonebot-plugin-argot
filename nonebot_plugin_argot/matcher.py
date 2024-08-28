@@ -5,7 +5,7 @@ from nonebot_plugin_alconna.builtins.extensions import ReplyRecordExtension
 
 from .config import plugin_config
 from .model import get_argot, get_argots
-from .utils import extract_urls, format_argots
+from .utils import is_data_url, extract_urls, format_argots, base64_to_bytes
 
 argot_cmd = Command("argot [name:str]").build(
     block=True,
@@ -35,10 +35,13 @@ async def _(
                 await UniMessage.text("该暗语不存在或已过期").finish(at_sender=True)
             else:
                 message = argot.content
-                if plugin_config.url_to_image:
-                    urls = extract_urls(message)
-                    for url in urls:
-                        message += Image(url=url)
+                if is_data_url(message):
+                    message = Image(raw=base64_to_bytes(message))
+                else:
+                    if plugin_config.url_to_image:
+                        urls = extract_urls(message)
+                        for url in urls:
+                            message += Image(url=url)
                 await UniMessage(message).finish(at_sender=True)
 
         argots = await get_argots(int(reply.id))
