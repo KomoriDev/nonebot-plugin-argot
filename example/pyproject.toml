@@ -8,6 +8,6 @@ requires-python = ">=3.10"
 adapters = [
     { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" }
 ]
-plugins = ["nonebot_plugin_argot"]
-plugin_dirs = []
+plugins = []
+plugin_dirs = ["plugins/"]
 builtin_plugins = []
