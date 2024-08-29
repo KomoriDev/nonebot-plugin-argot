@@ -10,7 +10,7 @@ from .utils import calculate_expired_at
 
 
 class Argot(Model):
-    message_id: Mapped[str] = mapped_column(primary_key=True)
+    message_id: Mapped[str] = mapped_column(String(20), primary_key=True)
     """Message ID"""
     name: Mapped[str] = mapped_column(String(20), primary_key=True)
     """Argot Name"""
