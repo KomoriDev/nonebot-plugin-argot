@@ -5,7 +5,7 @@
 groups = ["default", "adapters", "dev", "tests"]
 strategy = ["inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:72786b91aeb51ed407315a6b247320fd964499b8a8146f8edd4fab4f2023dd6b"
+content_hash = "sha256:81b53db8005a36e6afcd95ad97a9a3ad12e204cbd25c54c5cb8c1ad507481cfd"
 
 [[package]]
 name = "aiosqlite"
@@ -53,7 +53,7 @@ name = "anyio"
 version = "4.4.0"
 requires_python = ">=3.8"
 summary = "High level compatibility layer for multiple asynchronous event loop implementations"
-groups = ["dev"]
+groups = ["adapters", "dev"]
 dependencies = [
     "exceptiongroup>=1.0.2; python_version < \"3.11\"",
     "idna>=2.8",
@@ -161,6 +161,17 @@ files = [
 ]
 
 [[package]]
+name = "cashews"
+version = "7.3.0"
+requires_python = ">=3.8"
+summary = "cache tools with async power"
+groups = ["adapters"]
+files = [
+    {file = "cashews-7.3.0-py3-none-any.whl", hash = "sha256:8c002f48c78ad0d8281b3a22d0444fec5a94c2b5c8384fec25799e5441c38998"},
+    {file = "cashews-7.3.0.tar.gz", hash = "sha256:d35c9d369b5f0fd8869b0b452d27824e00db47dbd81d1d746c0e1d3492f28575"},
+]
+
+[[package]]
 name = "certifi"
 version = "2024.7.4"
 requires_python = ">=3.6"
@@ -264,7 +275,7 @@ name = "exceptiongroup"
 version = "1.2.2"
 requires_python = ">=3.7"
 summary = "Backport of PEP 654 (exception groups)"
-groups = ["dev", "tests"]
+groups = ["adapters", "dev", "tests"]
 marker = "python_version < \"3.11\""
 files = [
     {file = "exceptiongroup-1.2.2-py3-none-any.whl", hash = "sha256:3111b9d131c238bec2f8f516e123e14ba243563fb135d3fe885990585aa7795b"},
@@ -629,6 +640,65 @@ files = [
 ]
 
 [[package]]
+name = "nonebot-adapter-discord"
+version = "0.1.8"
+requires_python = "<4.0,>=3.9"
+summary = "Discord adapter for nonebot2"
+groups = ["adapters"]
+dependencies = [
+    "nonebot2<3.0.0,>=2.2.1",
+]
+files = [
+    {file = "nonebot_adapter_discord-0.1.8-py3-none-any.whl", hash = "sha256:d063bf524f6a75c5c123f2d04227e0ec62c2433f56b28fb92fa5eb2aebef1c16"},
+    {file = "nonebot_adapter_discord-0.1.8.tar.gz", hash = "sha256:5d3a7a8e0ab23b7ae84551b479c40c5d09733b15d09538d64765c5af54721781"},
+]
+
+[[package]]
+name = "nonebot-adapter-dodo"
+version = "0.2.1"
+requires_python = "<4.0,>=3.8"
+summary = "Dodo adapter for nonebot2"
+groups = ["adapters"]
+dependencies = [
+    "nonebot2<3.0.0,>=2.2.1",
+]
+files = [
+    {file = "nonebot_adapter_dodo-0.2.1-py3-none-any.whl", hash = "sha256:c388991bf1fc642a8328147d09d1445fc427ec915af873af031315be3ebb9eb7"},
+    {file = "nonebot_adapter_dodo-0.2.1.tar.gz", hash = "sha256:ad37ae0cbd807afcb83eacb37f5d50593d437ce077ba720541a53551eaeac675"},
+]
+
+[[package]]
+name = "nonebot-adapter-feishu"
+version = "2.6.2"
+requires_python = "<4.0,>=3.9"
+summary = "feishu(larksuite) adapter for nonebot2"
+groups = ["adapters"]
+dependencies = [
+    "cashews<8.0.0,>=7.0.0",
+    "nonebot2<3.0.0,>=2.2.0",
+    "pycryptodome<4.0.0,>=3.18.0",
+]
+files = [
+    {file = "nonebot_adapter_feishu-2.6.2-py3-none-any.whl", hash = "sha256:1f68dbfe353c0c7a29798cffaf72e174ef62e8b903c723c6a661d033237febcd"},
+    {file = "nonebot_adapter_feishu-2.6.2.tar.gz", hash = "sha256:1223ba0720bd1e0c1f85d5c1216fdbc91711196e351d1b870bcffeeeac41436d"},
+]
+
+[[package]]
+name = "nonebot-adapter-kaiheila"
+version = "0.3.4"
+requires_python = "<4.0,>=3.8"
+summary = "kaiheila adapter for nonebot2"
+groups = ["adapters"]
+dependencies = [
+    "nonebot2<3.0.0,>=2.2.0",
+    "typing-extensions<5.0.0,>=4.8.0",
+]
+files = [
+    {file = "nonebot_adapter_kaiheila-0.3.4-py3-none-any.whl", hash = "sha256:a4cc0e43bd24e015b8312f1753705116274d5b7e9a68be266384dd413ca4f510"},
+    {file = "nonebot_adapter_kaiheila-0.3.4.tar.gz", hash = "sha256:1fea823e5bc2bb5dc8e56a4c10a8f6698dac6e4f77d4526768275fa0925340f2"},
+]
+
+[[package]]
 name = "nonebot-adapter-onebot"
 version = "2.4.4"
 requires_python = "<4.0,>=3.9"
@@ -643,6 +713,68 @@ dependencies = [
 files = [
     {file = "nonebot_adapter_onebot-2.4.4-py3-none-any.whl", hash = "sha256:4dceeec7332bb560652c764405e9dd350268303f69b7c0e92b7cfebe876e8d39"},
     {file = "nonebot_adapter_onebot-2.4.4.tar.gz", hash = "sha256:c8a3645f74a3e43c85f092fb670508c662c36831f019a15e4d74eaac686089f0"},
+]
+
+[[package]]
+name = "nonebot-adapter-qq"
+version = "1.5.1"
+requires_python = "<4.0,>=3.9"
+summary = "QQ adapter for nonebot2"
+groups = ["adapters"]
+dependencies = [
+    "nonebot2<3.0.0,>=2.2.1",
+    "pydantic!=2.5.0,!=2.5.1,<3.0.0,>=1.10.0",
+    "typing-extensions<5.0.0,>=4.4.0",
+    "yarl<2.0.0,>=1.9.0",
+]
+files = [
+    {file = "nonebot_adapter_qq-1.5.1-py3-none-any.whl", hash = "sha256:d98a264087e2e92024673cbbefc963804b4a85b680599d9bebc5d3c606c8cd22"},
+    {file = "nonebot_adapter_qq-1.5.1.tar.gz", hash = "sha256:02cd9c6204fa8a711569fd59fd518826fb484a3ad5bcb45868a754091005a6ea"},
+]
+
+[[package]]
+name = "nonebot-adapter-red"
+version = "0.9.0"
+requires_python = ">=3.8"
+summary = "Red Protocol Adapter for Nonebot2"
+groups = ["adapters"]
+dependencies = [
+    "nonebot2>=2.2.0",
+    "packaging>=23.1",
+]
+files = [
+    {file = "nonebot_adapter_red-0.9.0-py3-none-any.whl", hash = "sha256:8dd5cd0a5d964faa23823b7c37fa8c64fa3ed8f67fa66515fe44a2708ee438ec"},
+    {file = "nonebot_adapter_red-0.9.0.tar.gz", hash = "sha256:a657c5ffb071c91deb4109bb94ac8046dcbea5cbb584437995c30ffb2d184954"},
+]
+
+[[package]]
+name = "nonebot-adapter-satori"
+version = "0.12.3"
+requires_python = ">=3.9"
+summary = "Satori Protocol Adapter for Nonebot2"
+groups = ["adapters"]
+dependencies = [
+    "nonebot2>=2.3.0",
+]
+files = [
+    {file = "nonebot_adapter_satori-0.12.3-py3-none-any.whl", hash = "sha256:94670f6a558cee185b42470dbd928d747c3ba72bea4f98f391ab2c41e3b79e27"},
+    {file = "nonebot_adapter_satori-0.12.3.tar.gz", hash = "sha256:5c2bd09fde92b36d863ba7cd85d5ca0fe8680ec2489d657f7ad8b0958cb9d9d8"},
+]
+
+[[package]]
+name = "nonebot-adapter-telegram"
+version = "0.1.0b17"
+requires_python = ">=3.8,<4.0"
+summary = "Telegram Adapter for NoneBot2"
+groups = ["adapters"]
+dependencies = [
+    "anyio<5.0.0,>=4.2.0",
+    "nonebot2<3.0.0,>=2.1.3",
+    "pydantic!=2.5.0,!=2.5.1,<3.0.0,>=2.0.3",
+]
+files = [
+    {file = "nonebot-adapter-telegram-0.1.0b17.tar.gz", hash = "sha256:0914b07e24d6a747a53426b4f8ae799c753a70b703242943f0421f8dee3e5f03"},
+    {file = "nonebot_adapter_telegram-0.1.0b17-py3-none-any.whl", hash = "sha256:4ff41a9a8ce828e229ffa7e192a82ea228ac60ae20abeeacbfd8244c6b71ecf8"},
 ]
 
 [[package]]
@@ -807,7 +939,7 @@ name = "packaging"
 version = "24.1"
 requires_python = ">=3.8"
 summary = "Core utilities for Python packages"
-groups = ["dev", "tests"]
+groups = ["adapters", "dev", "tests"]
 files = [
     {file = "packaging-24.1-py3-none-any.whl", hash = "sha256:5b8f2217dbdbd2f7f384c41c628544e6d52f2d0f53c6d0c3ea61aa5d1d7ff124"},
     {file = "packaging-24.1.tar.gz", hash = "sha256:026ed72c8ed3fcce5bf8950572258698927fd1dbda10a5e981cdf0ac37f4f002"},
@@ -862,6 +994,17 @@ dependencies = [
 files = [
     {file = "pre_commit-3.8.0-py2.py3-none-any.whl", hash = "sha256:9a90a53bf82fdd8778d58085faf8d83df56e40dfe18f45b19446e26bf1b3a63f"},
     {file = "pre_commit-3.8.0.tar.gz", hash = "sha256:8bb6494d4a20423842e198980c9ecf9f96607a07ea29549e180eef9ae80fe7af"},
+]
+
+[[package]]
+name = "pycryptodome"
+version = "3.20.0"
+requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+summary = "Cryptographic library for Python"
+groups = ["adapters"]
+files = [
+    {file = "pycryptodome-3.20.0-cp35-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:76cb39afede7055127e35a444c1c041d2e8d2f1f9c121ecef573757ba4cd2c3c"},
+    {file = "pycryptodome-3.20.0.tar.gz", hash = "sha256:09609209ed7de61c2b560cc5c8c4fbf892f8b15b1faf7e4cbffac97db1fffda7"},
 ]
 
 [[package]]
@@ -1103,7 +1246,7 @@ name = "sniffio"
 version = "1.3.1"
 requires_python = ">=3.7"
 summary = "Sniff out which async library your code is running under"
-groups = ["dev"]
+groups = ["adapters", "dev"]
 files = [
     {file = "sniffio-1.3.1-py3-none-any.whl", hash = "sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2"},
     {file = "sniffio-1.3.1.tar.gz", hash = "sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"},
