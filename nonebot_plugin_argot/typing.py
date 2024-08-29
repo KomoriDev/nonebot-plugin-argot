@@ -9,7 +9,7 @@ class ArgotArgs(TypedDict):
     """暗语名称"""
     content: str
     """暗语内容"""
-    message_id: int
+    message_id: str
     """存放暗语的消息 ID"""
     command: NotRequired[str]
     """用户触发指令（输入该指令查看暗语）"""

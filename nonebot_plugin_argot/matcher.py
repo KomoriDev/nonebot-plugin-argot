@@ -30,7 +30,7 @@ async def _(
 
     if reply := ext.get_reply(msg_id):
         if name.available:
-            argot = await get_argot(name.result, int(reply.id))
+            argot = await get_argot(name.result, reply.id)
             if argot is None:
                 await UniMessage.text("该暗语不存在或已过期").finish(at_sender=True)
             else:
@@ -44,7 +44,7 @@ async def _(
                             message += Image(url=url)
                 await UniMessage(message).finish(at_sender=True)
 
-        argots = await get_argots(int(reply.id))
+        argots = await get_argots(reply.id)
         if argots is None:
             await UniMessage.text("该消息没有设置暗语或已过期").finish(at_sender=True)
         message = format_argots(argots)

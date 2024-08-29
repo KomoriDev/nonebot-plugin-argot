@@ -45,7 +45,7 @@ async def _(
     argot_command: str = data["argot"].get("command", None)
     argot_expired: int = data["argot"].get("expire", None)
 
-    message_id: int = result["message_id"]
+    message_id = str(result["message_id"])
 
     await add_argot(
         name=argot_name,

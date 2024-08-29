@@ -10,7 +10,7 @@ from .utils import calculate_expired_at
 
 
 class Argot(Model):
-    message_id: Mapped[int] = mapped_column(primary_key=True)
+    message_id: Mapped[str] = mapped_column(primary_key=True)
     """Message ID"""
     name: Mapped[str] = mapped_column(String(20), primary_key=True)
     """Argot Name"""
@@ -24,7 +24,7 @@ class Argot(Model):
 
 async def add_argot(
     name: str,
-    message_id: int,
+    message_id: str,
     *,
     content: str | int,
     command: str | None = None,
@@ -62,7 +62,7 @@ def clean_expired_data(func):
 
 
 @clean_expired_data
-async def get_argot(name: str, message_id: int) -> Argot | None:
+async def get_argot(name: str, message_id: str) -> Argot | None:
     session = get_scoped_session()
     stmt = select(Argot).where(and_(Argot.name == name, Argot.message_id == message_id))
     argot = (await session.execute(stmt)).scalar()
@@ -70,7 +70,7 @@ async def get_argot(name: str, message_id: int) -> Argot | None:
 
 
 @clean_expired_data
-async def get_argots(message_id: int) -> Sequence[Argot] | None:
+async def get_argots(message_id: str) -> Sequence[Argot] | None:
     session = get_scoped_session()
 
     stmt = select(Argot).where(
