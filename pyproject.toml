@@ -37,7 +37,12 @@ dev = [
     "black>=24.4.2",
     "isort>=5.13.2",
     "pre-commit>=3.7.1",
+    "nonebot2[fastapi]>=2.3.2",
+    "nonebot-plugin-orm[default]>=0.7.6",
 ]
+
+[tool.nonebot]
+plugins = ["nonebot_plugin_argot"]
 
 [tool.black]
 line-length = 120
