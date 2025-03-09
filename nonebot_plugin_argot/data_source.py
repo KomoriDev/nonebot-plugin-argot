@@ -21,7 +21,7 @@ if not JSON_FILE.exists():
 
 async def load_data() -> list[Argot]:
     async with lock:
-        async with aiofiles.open(JSON_FILE, "r", encoding="utf-8") as f:
+        async with aiofiles.open(JSON_FILE, encoding="utf-8") as f:
             content = await f.read()
             data = [
                 Argot(**{k: v for k, v in data.items() if k not in {"created_at"}})
