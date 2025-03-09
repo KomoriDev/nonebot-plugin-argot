@@ -12,6 +12,54 @@ with suppress(ImportError):
     from nonebot.adapters.telegram import Bot
     from nonebot.adapters.telegram.model import Message as TGMessage
 
+    segments_dict = {}
+
+    @Bot.on_calling_api
+    async def _(
+        bot: BaseBot,
+        api: str,
+        data: dict[str, Any],
+    ) -> None:
+        if not isinstance(bot, Bot):
+            return
+
+        if api not in [
+            "send_message",
+            "send_photo",
+            "send_audio",
+            "send_document",
+            "send_video",
+            "send_animation",
+            "send_voice",
+            "send_video_note",
+            "send_location",
+            "send_venue",
+            "send_contact",
+            "send_poll",
+            "send_dice",
+            "send_sticker",
+            "send_invoice",
+            "send_media_group",
+        ]:
+            return
+
+        if "argot" in data:
+            segments_dict.update(data["argot"])
+            return
+
+        if data.get("message") is None:
+            return
+
+        segments = [seg for seg in data["message"] if seg.type == "argot"]
+
+        if not segments:
+            return
+
+        for seg in segments:
+            segments_dict.update(seg.__dict__["data"])
+
+        data["message"] = [seg for seg in data["message"] if seg.type != "argot"]
+
     @Bot.on_called_api
     async def _(
         bot: BaseBot,
@@ -60,12 +108,10 @@ with suppress(ImportError):
         else:
             return
 
-        if "argot" not in data:
+        if not segments_dict:
             return
 
-        await add_argot_from_hook(
-            message_id=message_id,
-            argot_data=data["argot"],
-        )
+        await add_argot_from_hook(message_id, segments_dict)
+        segments_dict.clear()
 
         raise MockApiException(result=result)

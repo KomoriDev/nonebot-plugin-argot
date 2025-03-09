@@ -30,7 +30,7 @@ async def app(tmp_path: Path):
     await init_orm()
     yield App()
 
-    from nonebot_plugin_argot.model import Argot
+    from nonebot_plugin_argot.data_source import Argot
 
     async with get_session() as session, session.begin():
         await session.execute(delete(Argot))

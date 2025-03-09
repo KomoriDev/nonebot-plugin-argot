@@ -10,6 +10,37 @@ from .utils import add_argot_from_hook
 with suppress(ImportError):
     from nonebot.adapters.feishu import Bot
 
+    segments_dict = {}
+
+    @Bot.on_calling_api
+    async def _(
+        bot: BaseBot,
+        api: str,
+        data: dict[str, Any],
+    ) -> None:
+        if not isinstance(bot, Bot):
+            return
+
+        if api not in ["im/v1/messages"] and not re.fullmatch(r"im/v1/messages/\S+/reply", api):
+            return
+
+        if "argot" in data:
+            segments_dict.update(data["argot"])
+            return
+
+        if data.get("message") is None:
+            return
+
+        segments = [seg for seg in data["message"] if seg.type == "argot"]
+
+        if not segments:
+            return
+
+        for seg in segments:
+            segments_dict.update(seg.__dict__["data"])
+
+        data["message"] = [seg for seg in data["message"] if seg.type != "argot"]
+
     @Bot.on_called_api
     async def _(
         bot: BaseBot,
@@ -24,15 +55,10 @@ with suppress(ImportError):
         if exception or not result:
             return
 
-        if api not in ["im/v1/messages"] and not re.fullmatch(r"im/v1/messages/\S+/reply", api):
+        if not segments_dict or "data" not in result:
             return
 
-        if "argot" not in data or "data" not in result:
-            return
-
-        await add_argot_from_hook(
-            message_id=result["data"]["message_id"],
-            argot_data=data["argot"],
-        )
+        await add_argot_from_hook(result["data"]["message_id"], segments_dict)
+        segments_dict.clear()
 
         raise MockApiException(result=result)

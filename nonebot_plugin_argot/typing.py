@@ -1,17 +1,55 @@
-from datetime import timedelta
-from typing_extensions import TypedDict, NotRequired
+from datetime import datetime
+from typing import Any, Literal
+from dataclasses import field, dataclass
+
+from nonebot_plugin_alconna.uniseg.segment import Text, Media, Segment
 
 
-class ArgotArgs(TypedDict):
-    """暗语参数"""
-
-    name: str
-    """暗语名称"""
-    content: str
-    """暗语内容"""
+@dataclass
+class Argot:
     message_id: str
-    """存放暗语的消息 ID"""
-    command: NotRequired[str]
-    """用户触发指令（输入该指令查看暗语）"""
-    expired_time: NotRequired[timedelta | int]
-    """过期时间"""
+    name: str
+    segment: str | Segment | list[Segment]
+    command: str | Literal[False] | None = None
+    created_at: datetime = field(default=datetime.now(), init=False)
+    expired_at: datetime | None = field(default=None)
+
+    def __post_init__(self):
+        self.message_id = str(self.message_id)
+        self.command = self.name if self.command is None else self.command
+
+        segment = []
+        self.segment = (
+            [Text(self.segment)]
+            if isinstance(self.segment, str)
+            else [self.segment] if isinstance(self.segment, Segment) else self.segment
+        )
+        self.expired_at = (
+            datetime.fromisoformat(self.expired_at) if isinstance(self.expired_at, str) else self.expired_at
+        )
+
+        for seg in self.segment:
+            if issubclass(type(seg), Segment):
+                if isinstance(seg, Media) and seg.path:
+                    seg.path = str(seg.path)
+                segment.append(seg.dump())
+            else:
+                segment.append(seg)
+        self.segment = segment
+
+    def dump(self) -> dict[str, Any]:
+        return {
+            "message_id": self.message_id,
+            "name": self.name,
+            "segment": list(self.segment),  # type: ignore
+            "command": self.command,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "expired_at": self.expired_at.isoformat() if self.expired_at else None,
+        }
+
+    def dump_segment(self) -> str | list:
+        if isinstance(self.segment, str):
+            return self.segment
+        elif isinstance(self.segment, Segment):
+            return [self.segment.dump()]
+        return list(self.segment)
