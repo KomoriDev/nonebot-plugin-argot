@@ -3,10 +3,17 @@ name = "nonebot_plugin_test"
 version = "0.1.0"
 description = "nonebot_plugin_test"
 requires-python = ">=3.10"
+dependencies = ["nonebot2[fastapi,httpx]>=2.4.1"]
 
+[project.optional-dependencies]
+adapters = [
+    "nonebot-adapter-onebot>=2.4.6",
+    "nonebot-adapter-telegram>=0.1.0b20",
+]
 [tool.nonebot]
 adapters = [
-    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" }
+    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
+    { name = "OneBot Telegram", module_name = "nonebot.adapters.telegram" }
 ]
 plugins = []
 plugin_dirs = ["plugins/"]
