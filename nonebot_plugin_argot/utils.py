@@ -1,4 +1,7 @@
+from typing import Any
 from datetime import datetime, timedelta
+
+message_id_keyword = ["message_id", "msgId", "id"]
 
 
 def calculate_expired_at(expire_time: timedelta | int) -> datetime:
@@ -9,3 +12,9 @@ def calculate_expired_at(expire_time: timedelta | int) -> datetime:
 
     expired_at = create_at + expire_time
     return expired_at
+
+
+def get_message_id(message: Any) -> str | None:
+    return next(
+        (message.get(key) for key in message_id_keyword if key in message),
+    )
