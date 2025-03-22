@@ -9,10 +9,10 @@ from nonebot_plugin_apscheduler import scheduler
 from . import hook as hook
 from .config import Config
 from . import matcher as matcher
+from .segment import Argot as Argot
 from .data_source import delete_expired_argots
 from .data_source import add_argot as add_argot
-from .data_source import get_argot as get_argot
-from .data_source import get_argots as get_argots
+from .utils import get_message_id as get_message_id
 
 __plugin_meta__ = PluginMetadata(
     name="暗语消息",
