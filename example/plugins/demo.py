@@ -10,6 +10,7 @@ from nonebot_plugin_alconna import Command
 from nonebot_plugin_alconna.uniseg import Text, Image, UniMessage
 
 from nonebot_plugin_argot import Argot, add_argot, get_message_id
+from nonebot_plugin_argot.extension import ArgotExtension, ArgotSendWrapper, current_send_wrapper
 
 cmd1 = Command("test1").build(use_cmd_start=True)
 
@@ -44,6 +45,23 @@ cmd3 = Command("test3").build(use_cmd_start=True)
 
 
 @cmd3.handle()
+async def _():
+
+    path: Path = Path(__file__).parent / "image.png"
+
+    current_send_wrapper.set(ArgotSendWrapper())
+    await UniMessage(
+        [
+            Text("This is a text message. Reply /image to get image."),
+            Argot("image", [Text("image"), Image(path=path)]),
+        ]
+    ).send()
+
+
+cmd4 = Command("test4").build(use_cmd_start=True, extensions=[ArgotExtension()])
+
+
+@cmd4.handle()
 async def _():
 
     path: Path = Path(__file__).parent / "image.png"

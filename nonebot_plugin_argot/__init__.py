@@ -13,6 +13,9 @@ from .segment import Argot as Argot
 from .data_source import delete_expired_argots
 from .data_source import add_argot as add_argot
 from .utils import get_message_id as get_message_id
+from .extension import ArgotExtension as ArgotExtension
+from .extension import ArgotSendWrapper as ArgotSendWrapper
+from .extension import current_send_wrapper as current_send_wrapper
 
 __plugin_meta__ = PluginMetadata(
     name="暗语消息",

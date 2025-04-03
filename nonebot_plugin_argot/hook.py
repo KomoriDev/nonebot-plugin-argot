@@ -3,8 +3,6 @@ from nonebot.log import logger
 from nonebot_plugin_alconna import command_manager
 from nonebot_plugin_localstore import get_plugin_cache_dir
 
-from . import adapters as adapters
-
 driver = get_driver()
 cach_dir = get_plugin_cache_dir() / "shortcut.db"
 
