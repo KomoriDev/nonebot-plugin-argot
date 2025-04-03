@@ -63,26 +63,13 @@ pip install nonebot-plugin-argot
 poetry add nonebot-plugin-argot
 # or, use pdm
 pdm add nonebot-plugin-argot
+# or, use uv
+uv add nonebot-plugin-argot
 ```
 
 </details>
 
-## ⚙️ 配置
-
-|            配置项             | 必填 |              默认值             |
-| :---------------------------: | :--: | :-----------------------------: |
-|     argot\_\_url_to_image     |  否  |              True               |
-
 ## 🎉 使用
-
-<details>
-<summary>🏷️ 支持情况</summary>
-
-| OneBot v11 | OneBot v12 | Kaiheila | Telegram | Feishu | Red | DoDo | Satori | QQ 官方 | Discord |
-| :--------: | :--------: | :------: | :------: | :----: | :-: | :--: | :----: | :-----: | :-----: |
-|     ✅     |     ✅     |    ✅    |    ✅    |   ✅   | ✅  |  ✅  |   ✅   |   ✅    |   ✅    |
-
-</details>
 
 ### 添加暗语
 
@@ -108,27 +95,49 @@ await cmd.send(
     }
 )
 
-# 使用 Alconna UniMessage 
-await (
-    UniMessage.text("This is a text message. Reply /background to get background image.")
-    .send(
-        argot={
-            "name": "background",
-            "command": "background",
-            "content": "https://koishi.chat/logo.png",
-            "expire": 60
-        }
+# 手动调用 `add_argot` 方法
+from nonebot_plugin_argot import add_argot, get_message_id
+
+@on_command("cmd").handle()
+async def _():
+    message = await cmd2.send("This is a text message. Reply /background to get background image.")
+    await add_argot(
+        message_id=get_message_id(message) or "",
+        name="background",
+        segment=Image(url="https://koishi.chat/logo.png"),
+        expired_at=timedelta(minutes=2),
     )
-)
+
+
+# 使用 Alconna UniMessage 
+from nonebot_plugin_alconna import Command
+from nonebot_plugin_alconna.uniseg import Text, Image, UniMessage
+from nonebot_plugin_argot.extension import ArgotExtension, ArgotSendWrapper, current_send_wrapper
+
+cmd1 = Command("cmd1").build(use_cmd_start=True)
+cmd2 = Command("cmd2").build(use_cmd_start=True, extensions=[ArgotExtension()])
+
+@cmd1.handle()
+async def _():
+    path: Path = Path(__file__).parent / "image.png"
+    current_send_wrapper.set(ArgotSendWrapper())
+    await UniMessage(
+        [
+            Text("This is a text message. Reply /image to get image."),
+            Argot("image", [Text("image"), Image(path=path)]),
+        ]
+    ).send()
+
+@cmd2.handle()
+async def _():
+    path: Path = Path(__file__).parent / "image.png"
+    await UniMessage(
+        [
+            Text("This is a text message. Reply /image to get image."),
+            Argot("image", [Text("image"), Image(path=path)]),
+        ]
+    ).send()
 ```
-
-或者使用 `add_argot` 函数。
-参数如下：
-
-- `name`：名称（相当于 `content` 的 key）
-- `content`：暗语内容
-- `command`：用户响应指令（为 None 则无法响应）
-- `expire`：过期时间（单位：秒；在 `add_argot` 函数中可传入 timedelta）
 
 ### 获取暗语信息
 
