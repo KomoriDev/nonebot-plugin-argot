@@ -120,13 +120,14 @@ cmd2 = Command("cmd2").build(use_cmd_start=True, extensions=[ArgotExtension()])
 @cmd1.handle()
 async def _():
     path: Path = Path(__file__).parent / "image.png"
-    current_send_wrapper.set(ArgotSendWrapper())
-    await UniMessage(
-        [
-            Text("This is a text message. Reply /image to get image."),
-            Argot("image", [Text("image"), Image(path=path)]),
-        ]
-    ).send()
+    
+    with current_send_wrapper.use(ArgotSendWrapper()):
+        await UniMessage(
+            [
+                Text("This is a text message. Reply /image to get image."),
+                Argot("image", [Text("image"), Image(path=path)]),
+            ]
+        ).send()
 
 @cmd2.handle()
 async def _():
