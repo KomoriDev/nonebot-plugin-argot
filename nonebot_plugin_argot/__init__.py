@@ -7,7 +7,6 @@ require("nonebot_plugin_apscheduler")
 from nonebot_plugin_apscheduler import scheduler
 
 from . import hook as hook
-from .config import Config
 from . import matcher as matcher
 from .segment import Argot as Argot
 from .data_source import delete_expired_argots
@@ -22,7 +21,7 @@ __plugin_meta__ = PluginMetadata(
     description="为消息添加暗语支持",
     usage="详见文档",
     type="library",
-    config=Config,
+    config=None,
     homepage="https://github.com/KomoriDev/nonebot-plugin-argot",
     supported_adapters=inherit_supported_adapters("nonebot_plugin_alconna"),
     extra={
