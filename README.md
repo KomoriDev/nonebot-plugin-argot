@@ -13,7 +13,7 @@
 _✨ NoneBot2 暗语消息 ✨_
 
 <a href="">
-  <img src="https://img.shields.io/pypi/v/nonebot-plugin-argot.svg" alt="pypi"
+  <img src="https://img.shields.io/pypi/v/nonebot-plugin-argot.svg" alt="pypi" />
 </a>
 <img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="python">
 <a href="https://pdm.fming.dev">
@@ -22,6 +22,16 @@ _✨ NoneBot2 暗语消息 ✨_
 <a href="https://github.com/nonebot/plugin-alconna">
   <img src="https://img.shields.io/badge/Alconna-resolved-2564C2" alt="alc-resolved">
 </a>
+
+<br/>
+
+<a href="https://registry.nonebot.dev/plugin/nonebot-plugin-argot:nonebot_plugin_argot">
+  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin%2Fnonebot-plugin-argot" alt="NoneBot Registry" />
+</a>
+<a href="https://registry.nonebot.dev/plugin/nonebot-plugin-argot:nonebot_plugin_argot">
+  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-argot" alt="Supported Adapters" />
+</a>
+
 <br />
 <a href="#-效果图">
   <strong>📸 演示与预览</strong>
@@ -39,7 +49,20 @@ _✨ NoneBot2 暗语消息 ✨_
 
 ## 📖 介绍
 
-NoneBot2 暗语消息
+NoneBot2 暗语消息支持
+
+> [!IMPORTANT]
+> **收藏项目**，你将从 GitHub 上无延迟地接收所有发布通知～⭐️
+
+<img width="100%" src="https://starify.komoridevs.icu/api/starify?owner=KomoriDev&repo=nonebot-plugin-argot" alt="starify" />
+
+<details>
+  <summary><kbd>Star History</kbd></summary>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=KomoriDev/nonebot-plugin-argot&theme=dark&type=Date" />
+    <img width="100%" src="https://star-history.com/#KomoriDev/nonebot-plugin-argot&Date" />
+  </picture>
+</details>
 
 ## 💿 安装
 
@@ -153,6 +176,22 @@ async def _():
 ## 💖 鸣谢
 
 - [`KiramiBot`](https://github.com/A-kirami/KiramiBot)：灵感来源
+- [`KomoriDev/Starify`](https://github.com/KomoriDev/Starify)：提供了引人注目的徽章
+
+### 贡献者们
+
+<a href="#-鸣谢">
+  <img src="https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square" alt="contributors" />
+</a>
+<a href="https://afdian.com/@komoridev">
+  <img src="https://img.shields.io/badge/all_sponsors-17-946ce6.svg?style=flat-square" alt="sponsors" />
+</a>
+
+感谢这些大佬对本项目作出的贡献:
+
+<a href="https://github.com/KomoriDev/nonebot-plugin-argot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=KomoriDev/nonebot-plugin-argot&max=1000" alt="contributors" />
+</a>
 
 ## 📄 许可证
 
