@@ -30,13 +30,13 @@ async def _(
         if name.available:
             argot = await get_argot(name.result, reply.id)
             if argot is None:
-                await UniMessage.text("该暗语不存在或已过期").finish(at_sender=True)
+                await UniMessage.text("该暗语不存在或已过期").finish(reply_to=reply.id)
             else:
-                await UniMessage.load(argot.dump_segment()).finish(at_sender=True)
+                await UniMessage.load(argot.dump_segment()).finish()
 
         argots = await get_argots(reply.id)
         if argots is None:
-            await UniMessage.text("该消息没有设置暗语或已过期").finish(at_sender=True)
+            await UniMessage.text("该消息没有设置暗语或已过期").finish(reply_to=reply.id)
         await UniMessage.load(argots.dump_segment()).finish(reply_to=reply.id)
     else:
         await UniMessage.text("需回复一条消息").finish()
