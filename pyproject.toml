@@ -16,27 +16,26 @@ requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}
 
+[dependency-groups]
+dev = [
+    "ruff>=0.6.1",
+    "black>=24.4.2",
+    "isort>=5.13.2",
+    "pre-commit>=3.7.1",
+    "nonebot2[fastapi,httpx]>=2.4.2",
+    "nonebot-adapter-onebot>=2.4.6",
+    "nonebot-adapter-telegram>=0.1.0b20",
+]
+
 [project.optional-dependencies]
 tests = [
     "nonebug>=0.3.7",
     "pytest-mock>=3.14.0",
     "pytest-asyncio>=0.23.8",
 ]
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
 
 [tool.pdm]
 distribution = true
-
-[tool.pdm.dev-dependencies]
-dev = [
-    "ruff>=0.6.1",
-    "black>=24.4.2",
-    "isort>=5.13.2",
-    "pre-commit>=3.7.1",
-    "nonebot2[fastapi]>=2.3.2",
-]
 
 [tool.black]
 line-length = 120
@@ -68,3 +67,7 @@ typeCheckingMode = "basic"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
