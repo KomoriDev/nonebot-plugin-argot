@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-argot"
-version = "0.1.6"
+version = "0.1.7"
 description = "NoneBot 暗语"
 authors = [
     {name = "KomoriDev", email = "mute231010@gmail.com"},
