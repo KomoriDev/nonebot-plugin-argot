@@ -5,6 +5,17 @@ require("nonebot_plugin_alconna")
 require("nonebot_plugin_localstore")
 require("nonebot_plugin_apscheduler")
 from nonebot_plugin_apscheduler import scheduler
+from nonebot_plugin_alconna.uniseg.segment import At as At
+from nonebot_plugin_alconna.uniseg.segment import I18n as I18n
+from nonebot_plugin_alconna.uniseg.segment import Text as Text
+from nonebot_plugin_alconna.uniseg.segment import AtAll as AtAll
+from nonebot_plugin_alconna.uniseg.segment import Audio as Audio
+from nonebot_plugin_alconna.uniseg.segment import Emoji as Emoji
+from nonebot_plugin_alconna.uniseg.segment import Image as Image
+from nonebot_plugin_alconna.uniseg.segment import Media as Media
+from nonebot_plugin_alconna.uniseg.segment import Reply as Reply
+from nonebot_plugin_alconna.uniseg.segment import Video as Video
+from nonebot_plugin_alconna.uniseg.segment import Voice as Voice
 
 from . import hook as hook
 from . import matcher as matcher

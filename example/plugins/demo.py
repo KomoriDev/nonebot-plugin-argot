@@ -7,9 +7,9 @@ require("nonebot_plugin_argot")
 require("nonebot_plugin_alconna")
 
 from nonebot_plugin_alconna import Command
-from nonebot_plugin_alconna.uniseg import Text, Image, UniMessage
+from nonebot_plugin_alconna.uniseg import UniMessage
 
-from nonebot_plugin_argot import Argot, add_argot, get_message_id
+from nonebot_plugin_argot import Text, Argot, Image, add_argot, get_message_id
 from nonebot_plugin_argot.extension import ArgotExtension, ArgotSendWrapper, current_send_wrapper
 
 cmd1 = Command("test1").build(use_cmd_start=True)
@@ -22,7 +22,7 @@ async def _():
         argot={
             "name": "background",
             "segment": Image(url="https://koishi.chat/logo.png"),
-            "expire": 240,  # The argot will expired after 4 minutes.
+            "expired_at": 240,  # The argot will expired after 4 minutes.
         }
     )
 
