@@ -11,7 +11,7 @@ from .segment import Argot
 from .utils import get_message_id
 from .data_source import add_argot_from_hook
 
-argot_data = {}
+argot_data = []
 send_msg_apis = ["send", "post", "create", "im/v1/messages", "im/v1/images"]
 
 
@@ -21,7 +21,7 @@ def process_argot_message(send: str | Message | UniMessage) -> str | Message | U
 
     argot_segments = [seg for seg in send if isinstance(seg, Argot)]
     for segment in argot_segments:
-        argot_data.update(segment.dump())
+        argot_data.append(segment.dump())
 
     return send.exclude(Argot) if argot_segments else send
 
@@ -62,7 +62,13 @@ async def _(
         return
 
     if "argot" in data:
-        argot_data.update(data["argot"])
+        if isinstance(data["argot"], list):
+            for item in data["argot"]:
+                argot_data.append(item)
+        elif isinstance(data["argot"], dict):
+            argot_data.append(data["argot"])
+        else:
+            raise ValueError(f"'argot' field must be a list or dict, got {type(data['argot']).__name__} instead.")
 
     if not argot_data:
         return
