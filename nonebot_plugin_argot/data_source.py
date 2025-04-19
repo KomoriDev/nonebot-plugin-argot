@@ -108,7 +108,7 @@ async def get_argot(name: str, message_id: str) -> Argot | None:
 
 
 @clean_expired_data
-async def get_argots(message_id: str) -> Argot | None:
+async def get_argots(message_id: str) -> list[Argot] | None:
     data = await load_data()
     filtered = [item for item in data if item.message_id == message_id]
-    return filtered[0] if filtered else None
+    return filtered if filtered else None

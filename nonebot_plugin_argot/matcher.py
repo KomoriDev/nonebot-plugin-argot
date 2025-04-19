@@ -3,7 +3,10 @@ from nonebot_plugin_alconna import Match, Arparma, Command
 from nonebot_plugin_alconna.uniseg import MsgId, UniMessage
 from nonebot_plugin_alconna.builtins.extensions import ReplyRecordExtension
 
+from .hook import driver
 from .data_source import get_argot, get_argots
+
+config = driver.config
 
 argot_cmd = Command("argot [name:str]").build(
     block=True,
@@ -35,8 +38,31 @@ async def _(
                 await UniMessage.load(argot.dump_segment()).finish()
 
         argots = await get_argots(reply.id)
+        messages = []
+
         if argots is None:
             await UniMessage.text("该消息没有设置暗语或已过期").finish(reply_to=reply.id)
-        await UniMessage.load(argots.dump_segment()).finish(reply_to=reply.id)
+
+        for idx, argot in enumerate(argots, 1):
+            message = f"▏暗语 #{idx}\n"
+            message += f"✦ 名称：{argot.name}\n"
+
+            create_time = argot.created_at.strftime("%Y-%m-%d %H:%M")
+            message += f"✦ 创建：{create_time}\n"
+
+            if argot.expired_at:
+                expire_time = argot.expired_at.strftime("%Y-%m-%d %H:%M")
+                message += f"✦ 过期：{expire_time}\n"
+            else:
+                message += "✦ 过期：永久有效\n"
+
+            cmd = argot.command if isinstance(argot.command, str) else "未绑定命令"
+            message += f"✦ 触发：{'|'.join(config.command_start)}{cmd}\n"
+
+            message += f"✦ 内容：{UniMessage.load(argot.dump_segment())}\n"
+            messages.append(message)
+        await UniMessage.text(f"🔍 消息暗语查询（共 {len(argots)} 条）\n" + " ".join(messages)).finish(
+            reply_to=reply.id
+        )
     else:
         await UniMessage.text("需回复一条消息").finish()
