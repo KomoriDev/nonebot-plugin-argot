@@ -112,96 +112,20 @@ class Argot(Segment):
   - `False`: 禁止通过指令获取暗语
 - `expired_at`: 过期时间
 
-<details>
-<summary>示例</summary>
+可以通过 `on_argot` 监听暗语事件
 
-1. NoneBot Matcher + Matcher.send
+```py
+@on_argot("name")
+async def _(event: ArgotEvent):
+  ...
+```
 
-    ```py
-    from nonebot_plugin_argot import add_argot, get_message_id
-
-    @on_command("cmd").handle()
-    async def _():
-        await cmd.send(
-            "This is a text message. Reply /background to get background image.",
-            argot={
-                "name": "background",
-                "command": "background",
-                "segment": Image(url="https://koishi.chat/logo.png"),
-                "expired_at": 60
-            }
-        )
-    ```
-
-2. NoneBot Matcher + UniMessage.send
-
-    ```py
-    from nonebot import on_command
-    from nonebot_plugin_alconna.uniseg import Text, Image, UniMessage
-    from nonebot_plugin_argot.extension import ArgotExtension, ArgotSendWrapper, current_send_wrapper
-
-    cmd = on_command("cmd")
-
-    @cmd.handle()
-    async def _():
-    path: Path = Path(__file__).parent / "image.png"
-
-    with current_send_wrapper.use(ArgotSendWrapper()):
-        await UniMessage(
-          [
-              Text("This is a text message. Reply /image to get image."),
-              Argot("image", [Text("image"), Image(path=path)]),
-          ]
-        ).send()
-    ```
-
-3. Alconna Matcher + UniMessage.send
-
-    ```py
-    from nonebot_plugin_alconna import Command
-    from nonebot_plugin_alconna.uniseg import Text, Image, UniMessage
-    from nonebot_plugin_argot.extension import ArgotExtension, ArgotSendWrapper, current_send_wrapper
-
-    cmd = Command("cmd").build(use_cmd_start=True, extensions=[ArgotExtension()])
-
-    @cmd.handle()
-    async def _():
-        path: Path = Path(__file__).parent / "image.png"
-        await UniMessage(
-            [
-                Text("This is a text message. Reply /image to get image."),
-                Argot("image", [Text("image"), Image(path=path)]),
-            ]
-        ).send()
-    ```
-
-4. 手动添加
-
-    ```py
-    from nonebot_plugin_argot import add_argot, get_message_id
-
-    @on_command("cmd").handle()
-    async def _():
-        message = await cmd2.send("This is a text message. Reply /background to get background image.")
-        await add_argot(
-            message_id=get_message_id(message) or "",
-            name="background",
-            segment=Image(url="https://koishi.chat/logo.png"),
-            expired_at=timedelta(minutes=2),
-        )
-    ```
-
-</details>
-
-获取暗语有以下几种方式:
-
-- 使用设置的 `command` 回复附带暗语的消息
-- 通过 `get_argot` 函数
-- 超管回复暗语消息 `/argot [name]`
+示例：👉 [传送门](./example/plugins/demo.py)
 
 ## 📸 效果图
 
-<img src="./docs/renderings.png" height="500" alt="rendering"/>
+<img src="./docs/example_1.png" height="200" alt="example"/>
+<img src="./docs/example_2.png" height="200" alt="example"/>
 
 ## 💖 鸣谢
 
