@@ -16,8 +16,8 @@ _✨ NoneBot2 暗语消息 ✨_
   <img src="https://img.shields.io/pypi/v/nonebot-plugin-argot.svg" alt="pypi" />
 </a>
 <img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="python">
-<a href="https://pdm.fming.dev">
-  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fpdm-project%2F.github%2Fbadge.json" alt="pdm-managed">
+<a href="https://github.com/astral-sh/uv">
+  <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json" alt="uv-managed">
 </a>
 <a href="https://github.com/nonebot/plugin-alconna">
   <img src="https://img.shields.io/badge/Alconna-resolved-2564C2" alt="alc-resolved">
