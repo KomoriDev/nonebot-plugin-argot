@@ -130,6 +130,7 @@ async def _(event: ArgotEvent):
 
 - [`KiramiBot`](https://github.com/A-kirami/KiramiBot)：灵感来源
 - [`KomoriDev/Starify`](https://github.com/KomoriDev/Starify)：提供了引人注目的徽章
+- [`ArcletProject/Letoderea`](https://github.com/ArcletProject/Letoderea)：高性能，结构简洁的事件系统
 
 ### 贡献者们
 
