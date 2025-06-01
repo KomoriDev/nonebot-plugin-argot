@@ -13,7 +13,7 @@ from .message import MessageSegment
 @dataclass
 class Argot(Segment):
     name: str
-    segment: str | Segment | list[Segment]
+    segment: str | Segment | list[Segment] | None = field(default=None)
     command: str | Literal[False] | None = field(default=None, kw_only=True)
     expired_at: int | timedelta = field(default_factory=timedelta, kw_only=True)
 
@@ -26,6 +26,9 @@ class Argot(Segment):
             if isinstance(self.segment, str)
             else [self.segment] if isinstance(self.segment, Segment) else self.segment
         )
+
+        if self.segment is None:
+            self.segment = []
 
         for seg in self.segment:
             if isinstance(seg, Media) and seg.path:

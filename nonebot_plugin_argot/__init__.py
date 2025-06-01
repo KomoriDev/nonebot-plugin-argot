@@ -20,6 +20,8 @@ from nonebot_plugin_alconna.uniseg.segment import Voice as Voice
 from . import hook as hook
 from . import matcher as matcher
 from .segment import Argot as Argot
+from .event import on_argot as on_argot
+from .event import ArgotEvent as ArgotEvent
 from .data_source import delete_expired_argots
 from .data_source import add_argot as add_argot
 from .utils import get_message_id as get_message_id

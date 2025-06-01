@@ -44,7 +44,7 @@ async def save_data(data: list[Argot]) -> None:
 async def add_argot(
     message_id: str,
     name: str,
-    segment: str | Segment | list[Segment],
+    segment: str | Segment | list[Segment] | None = None,
     command: str | Literal[False] | None = None,
     expired_at: timedelta | None = None,
 ) -> None:
@@ -75,7 +75,7 @@ async def add_argot_from_hook(
 ) -> None:
     for data in argot_data:
         name = data["name"]
-        segment = data["segment"]
+        segment = data.get("segment", None)
         command = data.get("command", None)
         expired = data.get("expired_at", None)
 

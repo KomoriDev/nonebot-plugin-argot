@@ -9,8 +9,8 @@ require("nonebot_plugin_alconna")
 from nonebot_plugin_alconna import Command
 from nonebot_plugin_alconna.uniseg import UniMessage
 
-from nonebot_plugin_argot import Text, Argot, Image, add_argot, get_message_id
 from nonebot_plugin_argot.extension import ArgotExtension, ArgotSendWrapper, current_send_wrapper
+from nonebot_plugin_argot import Text, Argot, Image, ArgotEvent, on_argot, add_argot, get_message_id
 
 cmd1 = Command("test1").build(use_cmd_start=True)
 
@@ -72,3 +72,23 @@ async def _():
             Argot("image", [Text("image"), Image(path=path)]),
         ]
     ).send()
+
+
+cmd5 = Command("test5").build(use_cmd_start=True, extensions=[ArgotExtension()])
+
+
+@cmd5.handle()
+async def _():
+
+    await UniMessage(
+        [
+            Text("This is a text message. Reply /target to get raw data."),
+            Argot("target"),
+        ]
+    ).send()
+
+
+@on_argot("target")
+async def _(event: ArgotEvent):
+    await event.target.send(f"触发暗语：{event.name}")
+    await event.target.send(f"发送对象：{event.target.dump()}")

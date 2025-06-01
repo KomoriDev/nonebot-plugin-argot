@@ -1,9 +1,11 @@
+import arclet.letoderea as le
 from nonebot.adapters import Bot, Event
 from nonebot_plugin_alconna import Match, Arparma, Command
-from nonebot_plugin_alconna.uniseg import MsgId, UniMessage
+from nonebot_plugin_alconna.uniseg import MsgId, UniMessage, get_target
 from nonebot_plugin_alconna.builtins.extensions import ReplyRecordExtension
 
 from .hook import driver
+from .event import ArgotEvent
 from .data_source import get_argot, get_argots
 
 config = driver.config
@@ -35,7 +37,11 @@ async def _(
             if argot is None:
                 await UniMessage.text("该暗语不存在或已过期").finish(reply_to=reply.id)
             else:
-                await UniMessage.load(argot.dump_segment()).finish()
+                target = get_target(event, bot)
+                await le.publish(ArgotEvent(name=argot.name, data=argot, target=target))
+                if data := argot.dump_segment():
+                    await UniMessage.load(data).finish()
+                await argot_cmd.finish()
 
         argots = await get_argots(reply.id)
         messages = []
@@ -59,7 +65,10 @@ async def _(
             cmd = argot.command if isinstance(argot.command, str) else "未绑定命令"
             message += f"✦ 触发：{'|'.join(config.command_start)}{cmd}\n"
 
-            message += f"✦ 内容：{UniMessage.load(argot.dump_segment())}\n"
+            if data := argot.dump_segment():
+                message += f"✦ 内容：{UniMessage.load(data)}\n"
+            else:
+                message += "✦ 内容：未知\n"
             messages.append(message)
         await UniMessage.text(f"🔍 消息暗语查询（共 {len(argots)} 条）\n" + " ".join(messages)).finish(
             reply_to=reply.id

@@ -9,12 +9,15 @@ from nonebot_plugin_alconna.uniseg.segment import Text, Media, Segment
 class Argot:
     message_id: str
     name: str
-    segment: str | Segment | list[Segment]
+    segment: str | Segment | list[Segment] | None = None
     command: str | Literal[False] | None = None
     created_at: datetime = field(default=datetime.now(), init=False)
     expired_at: datetime | None = field(default=None)
 
     def __post_init__(self):
+        if self.segment is None:
+            return
+
         self.message_id = str(self.message_id)
         self.command = self.name if self.command is None else self.command
 
@@ -41,13 +44,16 @@ class Argot:
         return {
             "message_id": self.message_id,
             "name": self.name,
-            "segment": list(self.segment),  # type: ignore
+            "segment": list(self.segment) if self.segment else None,  # type: ignore
             "command": self.command,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "expired_at": self.expired_at.isoformat() if self.expired_at else None,
         }
 
-    def dump_segment(self) -> str | list:
+    def dump_segment(self) -> str | list | None:
+        if self.segment is None:
+            return None
+
         if isinstance(self.segment, str):
             return self.segment
         elif isinstance(self.segment, Segment):

@@ -5,7 +5,7 @@
 groups = ["default", "dev", "tests"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:576dd757f0ec716b01efca77f48ba6fe6cee08eddd704ebb7ef733b4a51227f6"
+content_hash = "sha256:ba384f62e051c6668731be214f51326db1511b2cdf33aa5cb5964f96734ff581"
 
 [[metadata.targets]]
 requires_python = ">=3.10"
@@ -96,6 +96,20 @@ dependencies = [
 files = [
     {file = "arclet_alconna_tools-0.7.10-py3-none-any.whl", hash = "sha256:50e8b2f433fbc612dc8b99f4f5410006dcb1ef406c971c795071117a4eab8e20"},
     {file = "arclet_alconna_tools-0.7.10.tar.gz", hash = "sha256:446a63a9c56886c23fb44548bb9a18655e0ba5b5dd80cc87915b858dfb02554c"},
+]
+
+[[package]]
+name = "arclet-letoderea"
+version = "0.17.0"
+requires_python = ">=3.9"
+summary = "A high-performance, simple-structured event system, relies on asyncio"
+groups = ["default"]
+dependencies = [
+    "tarina>=0.6.7",
+]
+files = [
+    {file = "arclet_letoderea-0.17.0-py3-none-any.whl", hash = "sha256:7be94e5d45fdf9f4793e7a4d2d1e1c7e1e23d04bc4371ae7ffc91c4a99985f67"},
+    {file = "arclet_letoderea-0.17.0.tar.gz", hash = "sha256:cfa464f137cb80deef16f1259f37343f8f3529f8cf1e8c3f0c4cf78ac1b0dcf3"},
 ]
 
 [[package]]
