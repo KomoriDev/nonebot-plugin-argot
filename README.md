@@ -124,8 +124,7 @@ async def _(event: ArgotEvent):
 
 ## 📸 效果图
 
-<img src="./docs/example_1.png" height="200" alt="example"/>
-<img src="./docs/example_2.png" height="200" alt="example"/>
+<img src="./docs/example_1.png" height="400" alt="example"/> <img src="./docs/example_2.png" height="400" alt="example"/>
 
 ## 💖 鸣谢
 
