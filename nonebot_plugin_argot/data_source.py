@@ -57,7 +57,7 @@ async def add_argot(
         segment=segment,
         command=command,
         expired_at=calculate_expired_at(expired_at) if expired_at else None,
-        extra=extra
+        extra=extra,
     )
 
     if argot.command:

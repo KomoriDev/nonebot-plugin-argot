@@ -7,9 +7,9 @@ require("nonebot_plugin_argot")
 require("nonebot_plugin_alconna")
 require("nonebot_plugin_waiter")
 
+from nonebot_plugin_waiter import prompt
 from nonebot_plugin_alconna import Command
 from nonebot_plugin_alconna.uniseg import UniMessage
-from nonebot_plugin_waiter import prompt
 
 from nonebot_plugin_argot.extension import ArgotExtension, ArgotSendWrapper, current_send_wrapper
 from nonebot_plugin_argot import Text, Argot, Image, ArgotEvent, on_argot, add_argot, get_message_id

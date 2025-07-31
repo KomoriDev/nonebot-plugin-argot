@@ -1,5 +1,5 @@
-from typing import Any, Literal
 from datetime import timedelta
+from typing import Any, Literal
 from typing_extensions import Self, override
 
 from nonebot.adapters import Message as BaseMessage
