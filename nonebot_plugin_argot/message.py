@@ -1,5 +1,5 @@
-from typing import Literal
 from datetime import timedelta
+from typing import Any, Literal
 from typing_extensions import Self, override
 
 from nonebot.adapters import Message as BaseMessage
@@ -29,6 +29,7 @@ class MessageSegment(BaseMessageSegment["Message"]):
         segment: str | Segment | list[Segment],
         command: str | Literal[False] | None = None,
         expired_at: timedelta | None = None,
+        extra: dict[str, Any] = {},
     ) -> Self:
         seg = (
             [Text(segment).dump()]
@@ -42,6 +43,7 @@ class MessageSegment(BaseMessageSegment["Message"]):
                 "segment": seg,
                 "command": command,
                 "expired_at": expired_at,
+                "extra": extra,
             },
         )
 

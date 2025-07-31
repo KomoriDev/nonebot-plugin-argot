@@ -13,7 +13,7 @@ adapters = [
 [tool.nonebot]
 adapters = [
     { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
-    { name = "OneBot Telegram", module_name = "nonebot.adapters.telegram" }
+    { name = "Telegram", module_name = "nonebot.adapters.telegram" }
 ]
 plugins = []
 plugin_dirs = ["plugins/"]
