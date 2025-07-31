@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Any, Literal
 from datetime import timedelta
 from dataclasses import field, dataclass
 
@@ -16,6 +16,7 @@ class Argot(Segment):
     segment: str | Segment | list[Segment] | None = field(default=None)
     command: str | Literal[False] | None = field(default=None, kw_only=True)
     expired_at: int | timedelta = field(default_factory=timedelta, kw_only=True)
+    extra: dict[str, Any] = field(default_factory=dict, kw_only=True)
 
     def __str__(self):
         return ""
@@ -49,6 +50,7 @@ async def argot_export(exporter: MessageExporter, seg: Argot, bot: Bot | None, f
                 "segment": seg.segment,
                 "command": seg.command,
                 "expired_at": seg.expired_at,
+                "extra": seg.extra,  # 添加额外参数到MessageSegment
             }
         )
     return None

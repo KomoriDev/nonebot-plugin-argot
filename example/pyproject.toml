@@ -15,6 +15,6 @@ adapters = [
     { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
     { name = "OneBot Telegram", module_name = "nonebot.adapters.telegram" }
 ]
-plugins = []
+plugins = ["nonebot_plugin_waiter"]
 plugin_dirs = ["plugins/"]
 builtin_plugins = []

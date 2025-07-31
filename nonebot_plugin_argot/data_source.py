@@ -47,6 +47,7 @@ async def add_argot(
     segment: str | Segment | list[Segment] | None = None,
     command: str | Literal[False] | None = None,
     expired_at: timedelta | None = None,
+    extra: dict[str, Any] | None = None,
 ) -> None:
     from .matcher import argot_cmd
 
@@ -56,6 +57,7 @@ async def add_argot(
         segment=segment,
         command=command,
         expired_at=calculate_expired_at(expired_at) if expired_at else None,
+        extra=extra
     )
 
     if argot.command:
@@ -78,8 +80,16 @@ async def add_argot_from_hook(
         segment = data.get("segment", None)
         command = data.get("command", None)
         expired = data.get("expired_at", None)
+        extra = data.get("extra", None)
 
-        await add_argot(message_id=message_id, name=name, segment=segment, command=command, expired_at=expired)
+        await add_argot(
+            message_id=message_id,
+            name=name,
+            segment=segment,
+            command=command,
+            expired_at=expired,
+            extra=extra,
+        )
 
 
 async def delete_expired_argots() -> None:

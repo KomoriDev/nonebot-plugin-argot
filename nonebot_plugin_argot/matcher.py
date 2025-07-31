@@ -38,7 +38,7 @@ async def _(
                 await UniMessage.text("该暗语不存在或已过期").finish(reply_to=reply.id)
             else:
                 target = get_target(event, bot)
-                await le.publish(ArgotEvent(name=argot.name, data=argot, target=target))
+                await le.publish(ArgotEvent(name=argot.name, data=argot, target=target, extra=argot.extra))
                 if data := argot.dump_segment():
                     await UniMessage.load(data).finish()
                 await argot_cmd.finish()
@@ -69,6 +69,10 @@ async def _(
                 message += f"✦ 内容：{UniMessage.load(data)}\n"
             else:
                 message += "✦ 内容：未知\n"
+
+            if argot.extra:
+                message += f"✦ 额外参数：{repr(argot.extra)}\n"
+
             messages.append(message)
         await UniMessage.text(f"🔍 消息暗语查询（共 {len(argots)} 条）\n" + " ".join(messages)).finish(
             reply_to=reply.id

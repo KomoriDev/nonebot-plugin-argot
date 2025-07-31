@@ -5,9 +5,11 @@ from nonebot import require, on_command
 
 require("nonebot_plugin_argot")
 require("nonebot_plugin_alconna")
+require("nonebot_plugin_waiter")
 
 from nonebot_plugin_alconna import Command
 from nonebot_plugin_alconna.uniseg import UniMessage
+from nonebot_plugin_waiter import prompt
 
 from nonebot_plugin_argot.extension import ArgotExtension, ArgotSendWrapper, current_send_wrapper
 from nonebot_plugin_argot import Text, Argot, Image, ArgotEvent, on_argot, add_argot, get_message_id
@@ -92,3 +94,27 @@ async def _():
 async def _(event: ArgotEvent):
     await event.target.send(f"触发暗语：{event.name}")
     await event.target.send(f"发送对象：{event.target.dump()}")
+
+
+cmd6 = Command("test6").build(use_cmd_start=True, extensions=[ArgotExtension()])
+
+
+@cmd6.handle()
+async def _():
+
+    await UniMessage(
+        [
+            Text("This is a continuous interactive message. Reply /continue to trigger the action."),
+            Argot("cmd6_continue", extra={"id": 114514, "status": "success"}, command="continue"),
+        ]
+    ).send()
+
+
+@on_argot("cmd6_continue")
+async def _(event: ArgotEvent):
+    await event.target.send(f"初始状态：{event.extra['status']}；\n触发暗语事件：{repr(event)}")
+    resp = await prompt("请输入XXX", timeout=60)
+    if resp is None:
+        await event.target.send("等待超时！")
+        return
+    await event.target.send(f"你输入了{resp}")

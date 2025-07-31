@@ -1,5 +1,5 @@
 from collections.abc import Callable
-from typing import TypeVar, ParamSpec
+from typing import Any, TypeVar, ParamSpec
 
 import arclet.letoderea as le
 from nonebot.adapters import Bot
@@ -16,6 +16,7 @@ class ArgotEvent:
     name: str
     data: Argot
     target: Target
+    extra: dict[str, Any]
 
     async def get_bot(self) -> Bot:
         return await self.target.select()

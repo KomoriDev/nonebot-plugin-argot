@@ -103,6 +103,7 @@ class Argot(Segment):
     segment: str | Segment | list[Segment]
     command: str | Literal[False] | None = field(default=None, kw_only=True)
     expired_at: int | timedelta = field(default_factory=timedelta, kw_only=True)
+    extra: dict[str, Any] = field(default_factory=dict, kw_only=True)
 ```
 
 - `name`: 暗语名称
@@ -111,6 +112,7 @@ class Argot(Segment):
   - `None`: 使用 `name` 作为指令名
   - `False`: 禁止通过指令获取暗语
 - `expired_at`: 过期时间
+- `extra`：暗语事件中储存的额外数据
 
 可以通过 `on_argot` 监听暗语事件
 
