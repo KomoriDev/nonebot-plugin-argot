@@ -137,7 +137,7 @@ async def _(event: ArgotEvent):
 ### 贡献者们
 
 <a href="#-鸣谢">
-  <img src="https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square" alt="contributors" />
+  <img src="https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square" alt="contributors" />
 </a>
 <a href="https://afdian.com/@komoridev">
   <img src="https://img.shields.io/badge/all_sponsors-17-946ce6.svg?style=flat-square" alt="sponsors" />

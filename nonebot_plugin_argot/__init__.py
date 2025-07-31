@@ -40,7 +40,7 @@ __plugin_meta__ = PluginMetadata(
     extra={
         "unique_name": "Argot",
         "author": "Komorebi <mute231010@gmail.com>",
-        "version": "0.1.9",
+        "version": "0.2.0",
     },
 )
 
