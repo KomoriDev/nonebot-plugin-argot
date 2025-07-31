@@ -13,7 +13,7 @@ class Argot:
     command: str | Literal[False] | None = None
     created_at: datetime = field(default=datetime.now(), init=False)
     expired_at: datetime | None = field(default=None)
-    extra: dict[str, Any] = field(default_factory=dict)  # 添加额外参数字段
+    extra: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self):
         if self.segment is None:
@@ -49,7 +49,7 @@ class Argot:
             "command": self.command,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "expired_at": self.expired_at.isoformat() if self.expired_at else None,
-            "extra": self.extra,  # 添加额外参数到dump方法
+            "extra": self.extra if self.extra else {},
         }
 
     def dump_segment(self) -> str | list | None:

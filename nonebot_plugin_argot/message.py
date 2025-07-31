@@ -29,7 +29,7 @@ class MessageSegment(BaseMessageSegment["Message"]):
         segment: str | Segment | list[Segment],
         command: str | Literal[False] | None = None,
         expired_at: timedelta | None = None,
-        extra: dict[str, Any] | None = None,
+        extra: dict[str, Any] = {},
     ) -> Self:
         seg = (
             [Text(segment).dump()]
