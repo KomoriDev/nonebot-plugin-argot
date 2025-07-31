@@ -50,7 +50,7 @@ async def argot_export(exporter: MessageExporter, seg: Argot, bot: Bot | None, f
                 "segment": seg.segment,
                 "command": seg.command,
                 "expired_at": seg.expired_at,
-                "extra": seg.extra,  # 添加额外参数到MessageSegment
+                "extra": seg.extra,
             }
         )
     return None
