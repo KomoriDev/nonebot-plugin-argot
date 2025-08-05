@@ -16,20 +16,19 @@ class Argot:
     extra: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self):
-        if self.segment is None:
-            return
-
         self.message_id = str(self.message_id)
         self.command = self.name if self.command is None else self.command
+        self.expired_at = (
+            datetime.fromisoformat(self.expired_at) if isinstance(self.expired_at, str) else self.expired_at
+        )
 
+        if self.segment is None:
+            return
         segment = []
         self.segment = (
             [Text(self.segment)]
             if isinstance(self.segment, str)
             else [self.segment] if isinstance(self.segment, Segment) else self.segment
-        )
-        self.expired_at = (
-            datetime.fromisoformat(self.expired_at) if isinstance(self.expired_at, str) else self.expired_at
         )
 
         for seg in self.segment:
